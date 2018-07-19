@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hoperun.micro.security.dao.HpDevicesModelsMapper">
+  <resultMap id="BaseResultMap" type="com.hoperun.micro.security.model.HpDevicesModels">
+    <id column="model_id" jdbcType="VARCHAR" property="modelId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    model_id, name, description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hp_devices_models
+    where model_id = #{modelId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from hp_devices_models
+    where model_id = #{modelId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hoperun.micro.security.model.HpDevicesModels">
+    insert into hp_devices_models (model_id, name, description
+      )
+    values (#{modelId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoperun.micro.security.model.HpDevicesModels">
+    insert into hp_devices_models
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="modelId != null">
+        model_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="modelId != null">
+        #{modelId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoperun.micro.security.model.HpDevicesModels">
+    update hp_devices_models
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where model_id = #{modelId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoperun.micro.security.model.HpDevicesModels">
+    update hp_devices_models
+    set name = #{name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR}
+    where model_id = #{modelId,jdbcType=VARCHAR}
+  </update>
+</mapper>

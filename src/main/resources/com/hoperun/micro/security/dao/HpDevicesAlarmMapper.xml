@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hoperun.micro.security.dao.HpDevicesAlarmMapper">
+	<resultMap id="BaseResultMap"
+		type="com.hoperun.micro.security.model.HpDevicesAlarm">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="device_type" jdbcType="VARCHAR" property="deviceType" />
+		<result column="serial" jdbcType="VARCHAR" property="serial" />
+		<result column="tenant_id" jdbcType="VARCHAR" property="tenantId" />
+		<result column="attime" jdbcType="INTEGER" property="attime" />
+		<result column="processtime" jdbcType="INTEGER" property="processtime" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+		<result column="alarm_val" jdbcType="VARCHAR" property="alarmVal" />
+		<result column="except_type" jdbcType="INTEGER" property="exceptType" />
+		<result column="except_level" jdbcType="INTEGER" property="exceptLevel" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, device_type, serial, tenant_id, attime, processtime, status,
+		alarm_val, except_type,
+		except_level
+	</sql>
+	
+		<!-- 智能排序与分页 -->
+	<sql id="QUERY_ORDER_LIMIT_CONDITION">
+		<if
+			test="orderField != null and orderField != '' and orderFieldType != null and orderFieldType != ''">
+         <![CDATA[ORDER BY ${orderField} ${orderFieldType}]]></if>
+		<if
+			test="startIndex != null and startIndex &gt;= 0 and pageSize != null and pageSize &gt; 0">
+         <![CDATA[LIMIT #{startIndex},#{pageSize}]]></if>
+	</sql>
+
+	<sql id="QUERY_WHERE_CLAUSE">
+		<where>
+			<if test="id != null "><![CDATA[AND id = #{id,jdbcType=INTEGER}]]></if>
+			<if test="deviceType != null "><![CDATA[AND device_type = #{deviceType,jdbcType=VARCHAR}]]></if>
+			<if test="serial != null "><![CDATA[AND serial = #{serial,jdbcType=VARCHAR}]]></if>
+			<if test="tenantId != null "><![CDATA[AND tenant_id = #{tenantId,jdbcType=VARCHAR}]]></if>
+			<if test="attime != null "><![CDATA[AND attime = #{attime,jdbcType=INTEGER}]]></if>
+			<if test="processtime != null "><![CDATA[AND processtime = #{processtime,jdbcType=INTEGER}]]></if>
+			<if test="status != null "><![CDATA[AND status = #{status,jdbcType=INTEGER}]]></if>
+			<if test="alarmVal != null "><![CDATA[AND alarm_val = #{alarmVal,jdbcType=VARCHAR}]]></if>
+			<if test="exceptType != null "><![CDATA[AND except_type = #{exceptType,jdbcType=INTEGER}]]></if>
+			<if test="exceptLevel != null "><![CDATA[AND except_level = #{exceptLevel,jdbcType=INTEGER}]]></if>
+			<if test="startTime != null and startTime &gt; 0"><![CDATA[AND attime >= #{startTime}]]></if>
+			<if test="endTime != null and endTime &gt; 0"><![CDATA[AND attime < #{endTime}]]></if>
+		</where>
+	</sql>
+
+	<select id="selectListByParams" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from hp_devices_alarm
+		<include refid="QUERY_WHERE_CLAUSE" />
+		<include refid="QUERY_ORDER_LIMIT_CONDITION" />
+	</select>
+	
+	<select id="selectBySerial" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from hp_devices_alarm
+		where serial = #{serial,jdbcType=INTEGER}
+	</select>
+	
+	<select id="selectCountByParams" parameterType="java.util.Map" resultType="int">
+		select count(*)
+		from hp_devices_alarm
+		<include refid="QUERY_WHERE_CLAUSE" />
+	</select>
+
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from hp_devices_alarm
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from hp_devices_alarm
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.hoperun.micro.security.model.HpDevicesAlarm">
+		insert into hp_devices_alarm (id, device_type, serial,
+		tenant_id, attime, processtime,
+		status, alarm_val, except_type,
+		except_level)
+		values (#{id,jdbcType=INTEGER}, #{deviceType,jdbcType=VARCHAR},
+		#{serial,jdbcType=VARCHAR},
+		#{tenantId,jdbcType=VARCHAR}, #{attime,jdbcType=INTEGER}, #{processtime,jdbcType=INTEGER},
+		#{status,jdbcType=INTEGER}, #{alarmVal,jdbcType=VARCHAR},
+		#{exceptType,jdbcType=INTEGER},
+		#{exceptLevel,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.hoperun.micro.security.model.HpDevicesAlarm">
+		insert into hp_devices_alarm
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="deviceType != null">
+				device_type,
+			</if>
+			<if test="serial != null">
+				serial,
+			</if>
+			<if test="tenantId != null">
+				tenant_id,
+			</if>
+			<if test="attime != null">
+				attime,
+			</if>
+			<if test="processtime != null">
+				processtime,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="alarmVal != null">
+				alarm_val,
+			</if>
+			<if test="exceptType != null">
+				except_type,
+			</if>
+			<if test="exceptLevel != null">
+				except_level,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="deviceType != null">
+				#{deviceType,jdbcType=VARCHAR},
+			</if>
+			<if test="serial != null">
+				#{serial,jdbcType=VARCHAR},
+			</if>
+			<if test="tenantId != null">
+				#{tenantId,jdbcType=VARCHAR},
+			</if>
+			<if test="attime != null">
+				#{attime,jdbcType=INTEGER},
+			</if>
+			<if test="processtime != null">
+				#{processtime,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="alarmVal != null">
+				#{alarmVal,jdbcType=VARCHAR},
+			</if>
+			<if test="exceptType != null">
+				#{exceptType,jdbcType=INTEGER},
+			</if>
+			<if test="exceptLevel != null">
+				#{exceptLevel,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.hoperun.micro.security.model.HpDevicesAlarm">
+		update hp_devices_alarm
+		<set>
+			<if test="deviceType != null">
+				device_type = #{deviceType,jdbcType=VARCHAR},
+			</if>
+			<if test="serial != null">
+				serial = #{serial,jdbcType=VARCHAR},
+			</if>
+			<if test="tenantId != null">
+				tenant_id = #{tenantId,jdbcType=VARCHAR},
+			</if>
+			<if test="attime != null">
+				attime = #{attime,jdbcType=INTEGER},
+			</if>
+			<if test="processtime != null">
+				processtime = #{processtime,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="alarmVal != null">
+				alarm_val = #{alarmVal,jdbcType=VARCHAR},
+			</if>
+			<if test="exceptType != null">
+				except_type = #{exceptType,jdbcType=INTEGER},
+			</if>
+			<if test="exceptLevel != null">
+				except_level = #{exceptLevel,jdbcType=INTEGER},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.hoperun.micro.security.model.HpDevicesAlarm">
+		update hp_devices_alarm
+		set device_type = #{deviceType,jdbcType=VARCHAR},
+		serial = #{serial,jdbcType=VARCHAR},
+		tenant_id = #{tenantId,jdbcType=VARCHAR},
+		attime = #{attime,jdbcType=INTEGER},
+		processtime = #{processtime,jdbcType=INTEGER},
+		status = #{status,jdbcType=INTEGER},
+		alarm_val = #{alarmVal,jdbcType=VARCHAR},
+		except_type = #{exceptType,jdbcType=INTEGER},
+		except_level = #{exceptLevel,jdbcType=INTEGER}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

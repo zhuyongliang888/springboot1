@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hoperun.micro.security.dao.HpDevicesMapper">
+  <resultMap id="BaseResultMap" type="com.hoperun.micro.security.model.HpDevices">
+    <id column="dev_id" jdbcType="VARCHAR" property="devId" />
+    <result column="serial" jdbcType="VARCHAR" property="serial" />
+    <result column="alias" jdbcType="VARCHAR" property="alias" />
+    <result column="device_type" jdbcType="VARCHAR" property="deviceType" />
+    <result column="tenant_id" jdbcType="VARCHAR" property="tenantId" />
+    <result column="branch_id" jdbcType="VARCHAR" property="branchId" />
+    <result column="location" jdbcType="VARCHAR" property="location" />
+    <result column="building" jdbcType="VARCHAR" property="building" />
+    <result column="floor" jdbcType="VARCHAR" property="floor" />
+    <result column="room" jdbcType="VARCHAR" property="room" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    dev_id, serial, alias, device_type, tenant_id, branch_id, location, building, floor, 
+    room
+  </sql>
+  
+  <sql id="QUERY_WHERE_CLAUSE">
+		<where>
+			<if test="devId != null "><![CDATA[AND dev_id = #{devId,jdbcType=VARCHAR}]]></if>
+			<if test="serial != null "><![CDATA[AND serial = #{serial,jdbcType=VARCHAR}]]></if>
+			<if test="alias != null "><![CDATA[AND alias = #{alias,jdbcType=VARCHAR}]]></if>
+			<if test="deviceType != null "><![CDATA[AND device_type = #{deviceType,jdbcType=VARCHAR}]]></if>
+			<if test="tenantId != null "><![CDATA[AND tenant_id = #{tenantId,jdbcType=VARCHAR}]]></if>
+			<if test="branchId != null "><![CDATA[AND branch_id = #{branchId,jdbcType=VARCHAR}]]></if>
+			<if test="location != null "><![CDATA[AND location = #{location,jdbcType=VARCHAR}]]></if>
+			<if test="building != null "><![CDATA[AND building = #{building,jdbcType=VARCHAR}]]></if>
+			<if test="floor != null "><![CDATA[AND floor = #{floor,jdbcType=VARCHAR}]]></if>
+			<if test="room != null "><![CDATA[AND room = #{room,jdbcType=VARCHAR}]]></if>
+		</where>
+	</sql>
+
+	<select id="selectRecordsBySerial" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from hp_devices
+		where serial = #{serial,jdbcType=VARCHAR}
+	</select>
+  
+  <select id="selectListByParams" parameterType="java.util.Map" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from hp_devices
+		<include refid="QUERY_WHERE_CLAUSE" />
+	</select>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hp_devices
+    where dev_id = #{devId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from hp_devices
+    where dev_id = #{devId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hoperun.micro.security.model.HpDevices">
+    insert into hp_devices (dev_id, serial, alias, 
+      device_type, tenant_id, branch_id, 
+      location, building, floor, 
+      room)
+    values (#{devId,jdbcType=VARCHAR}, #{serial,jdbcType=VARCHAR}, #{alias,jdbcType=VARCHAR}, 
+      #{deviceType,jdbcType=VARCHAR}, #{tenantId,jdbcType=VARCHAR}, #{branchId,jdbcType=VARCHAR}, 
+      #{location,jdbcType=VARCHAR}, #{building,jdbcType=VARCHAR}, #{floor,jdbcType=VARCHAR}, 
+      #{room,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoperun.micro.security.model.HpDevices">
+    insert into hp_devices
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="devId != null">
+        dev_id,
+      </if>
+      <if test="serial != null">
+        serial,
+      </if>
+      <if test="alias != null">
+        alias,
+      </if>
+      <if test="deviceType != null">
+        device_type,
+      </if>
+      <if test="tenantId != null">
+        tenant_id,
+      </if>
+      <if test="branchId != null">
+        branch_id,
+      </if>
+      <if test="location != null">
+        location,
+      </if>
+      <if test="building != null">
+        building,
+      </if>
+      <if test="floor != null">
+        floor,
+      </if>
+      <if test="room != null">
+        room,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="devId != null">
+        #{devId,jdbcType=VARCHAR},
+      </if>
+      <if test="serial != null">
+        #{serial,jdbcType=VARCHAR},
+      </if>
+      <if test="alias != null">
+        #{alias,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceType != null">
+        #{deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null">
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="branchId != null">
+        #{branchId,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null">
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="building != null">
+        #{building,jdbcType=VARCHAR},
+      </if>
+      <if test="floor != null">
+        #{floor,jdbcType=VARCHAR},
+      </if>
+      <if test="room != null">
+        #{room,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoperun.micro.security.model.HpDevices">
+    update hp_devices
+    <set>
+      <if test="serial != null">
+        serial = #{serial,jdbcType=VARCHAR},
+      </if>
+      <if test="alias != null">
+        alias = #{alias,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceType != null">
+        device_type = #{deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null">
+        tenant_id = #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="branchId != null">
+        branch_id = #{branchId,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null">
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="building != null">
+        building = #{building,jdbcType=VARCHAR},
+      </if>
+      <if test="floor != null">
+        floor = #{floor,jdbcType=VARCHAR},
+      </if>
+      <if test="room != null">
+        room = #{room,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where dev_id = #{devId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoperun.micro.security.model.HpDevices">
+    update hp_devices
+    set serial = #{serial,jdbcType=VARCHAR},
+      alias = #{alias,jdbcType=VARCHAR},
+      device_type = #{deviceType,jdbcType=VARCHAR},
+      tenant_id = #{tenantId,jdbcType=VARCHAR},
+      branch_id = #{branchId,jdbcType=VARCHAR},
+      location = #{location,jdbcType=VARCHAR},
+      building = #{building,jdbcType=VARCHAR},
+      floor = #{floor,jdbcType=VARCHAR},
+      room = #{room,jdbcType=VARCHAR}
+    where dev_id = #{devId,jdbcType=VARCHAR}
+  </update>
+  
+</mapper>

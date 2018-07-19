@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+  <context id="jimmy">
+          <commentGenerator>  
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true"/>  
+        </commentGenerator>
+    <!-- 数据库链接URL、用户名、密码 --> 
+    <jdbcConnection connectionURL="jdbc:mysql://127.0.0.1:3306/devices?characterEncoding=utf8" driverClass="com.mysql.jdbc.Driver" password="1111111" userId="root" />
+    <!-- 生成模型的包名和位置 -->  
+    <javaModelGenerator targetPackage="com.hoperun.micro.security.model" targetProject="micro-service-security-statistic/src/main/java" />
+    <!-- 生成的映射文件报名和位置 xml--> 
+    <sqlMapGenerator targetPackage="com.hoperun.micro.security.dao" targetProject="micro-service-security-statistic/src/main/resources" />
+    <!-- 生成DAO的包名和位置 --> 
+    <javaClientGenerator targetPackage="com.hoperun.micro.security.dao" targetProject="micro-service-security-statistic/src/main/java" type="XMLMAPPER" />
+    <!-- 要生成的那些表,数据库名,表名,生成的model名 --> 
+    <!-- <table schema="devices" tableName="hp_devices_collection" domainObjectName="HpDevicesCollection"
+        enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false"
+        selectByExampleQueryId="false" >
+    </table> 
+    
+     <table schema="devices" tableName="hp_devices" domainObjectName="HpDevices"
+        enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false"
+        selectByExampleQueryId="false" >
+    </table>
+    
+    <table schema="devices" tableName="hp_devices_mfs" domainObjectName="HpDevicesMfs"
+        enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false"
+        selectByExampleQueryId="false" >
+    </table>
+    
+    <table schema="devices" tableName="hp_maintains_company" domainObjectName="HpMaintainsCompany"
+        enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false"
+        selectByExampleQueryId="false" >
+    </table>
+    
+    <table schema="devices" tableName="hp_maintains_employee" domainObjectName="HpMaintainsEmployee"
+        enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false"
+        selectByExampleQueryId="false" >
+    </table>
+    
+     <table schema="devices" tableName="hp_devices_maintains_employee" domainObjectName="HpDevicesMaintainsEmployee"
+        enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false"
+        selectByExampleQueryId="false" >
+    </table>
+    
+    <table schema="devices" tableName="hp_devices_alarm_rules" domainObjectName="HpDevicesAlarmRules"
+        enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false"
+        selectByExampleQueryId="false" >
+    </table>
+    
+    <table schema="devices" tableName="hp_devices_alarm_logs" domainObjectName="HpDevicesAlarmLogs"
+        enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false"
+        selectByExampleQueryId="false" >
+    </table>
+    
+    <table schema="devices" tableName="hp_tenants_devices_collections" domainObjectName="HpTenantsDevicesCollections"
+        enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false"
+        selectByExampleQueryId="false" >
+    </table>
+    
+    <table schema="devices" tableName="hp_devices_models" domainObjectName="HpDevicesModels"
+        enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false"
+        selectByExampleQueryId="false" >
+    </table>
+    
+    <table schema="devices" tableName="hp_users" domainObjectName="HpUsers"
+        enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false"
+        selectByExampleQueryId="false" >
+    </table>
+    
+     <table schema="devices" tableName="hp_devices_alarm" domainObjectName="HpDevicesAlarm"
+        enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false"
+        selectByExampleQueryId="false" >
+    </table> -->
+    
+     <table schema="devices" tableName="hp_devices" domainObjectName="HpDevices"
+        enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false"
+        selectByExampleQueryId="false" >
+    </table>
+  </context>
+</generatorConfiguration>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hoperun.micro.security.dao.HpDevicesAlarmLogsMapper">
+  <resultMap id="BaseResultMap" type="com.hoperun.micro.security.model.HpDevicesAlarmLogs">
+    <id column="log_id" jdbcType="VARCHAR" property="logId" />
+    <result column="tenant_id" jdbcType="VARCHAR" property="tenantId" />
+    <result column="device_type" jdbcType="VARCHAR" property="deviceType" />
+    <result column="serial" jdbcType="VARCHAR" property="serial" />
+    <result column="attime" jdbcType="DATE" property="attime" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    log_id, tenant_id, device_type, serial, attime, content, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hp_devices_alarm_logs
+    where log_id = #{logId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from hp_devices_alarm_logs
+    where log_id = #{logId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hoperun.micro.security.model.HpDevicesAlarmLogs">
+    insert into hp_devices_alarm_logs (log_id, tenant_id, device_type, 
+      serial, attime, content, 
+      status)
+    values (#{logId,jdbcType=VARCHAR}, #{tenantId,jdbcType=VARCHAR}, #{deviceType,jdbcType=VARCHAR}, 
+      #{serial,jdbcType=VARCHAR}, #{attime,jdbcType=DATE}, #{content,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoperun.micro.security.model.HpDevicesAlarmLogs">
+    insert into hp_devices_alarm_logs
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="logId != null">
+        log_id,
+      </if>
+      <if test="tenantId != null">
+        tenant_id,
+      </if>
+      <if test="deviceType != null">
+        device_type,
+      </if>
+      <if test="serial != null">
+        serial,
+      </if>
+      <if test="attime != null">
+        attime,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="logId != null">
+        #{logId,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null">
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceType != null">
+        #{deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="serial != null">
+        #{serial,jdbcType=VARCHAR},
+      </if>
+      <if test="attime != null">
+        #{attime,jdbcType=DATE},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoperun.micro.security.model.HpDevicesAlarmLogs">
+    update hp_devices_alarm_logs
+    <set>
+      <if test="tenantId != null">
+        tenant_id = #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceType != null">
+        device_type = #{deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="serial != null">
+        serial = #{serial,jdbcType=VARCHAR},
+      </if>
+      <if test="attime != null">
+        attime = #{attime,jdbcType=DATE},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where log_id = #{logId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoperun.micro.security.model.HpDevicesAlarmLogs">
+    update hp_devices_alarm_logs
+    set tenant_id = #{tenantId,jdbcType=VARCHAR},
+      device_type = #{deviceType,jdbcType=VARCHAR},
+      serial = #{serial,jdbcType=VARCHAR},
+      attime = #{attime,jdbcType=DATE},
+      content = #{content,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER}
+    where log_id = #{logId,jdbcType=VARCHAR}
+  </update>
+</mapper>

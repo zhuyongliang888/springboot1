@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hoperun.micro.security.dao.HpDevicesAlarmRulesMapper">
+  <resultMap id="BaseResultMap" type="com.hoperun.micro.security.model.HpDevicesAlarmRules">
+    <id column="rule_id" jdbcType="VARCHAR" property="ruleId" />
+    <result column="tenant_id" jdbcType="VARCHAR" property="tenantId" />
+    <result column="device_type" jdbcType="VARCHAR" property="deviceType" />
+    <result column="action" jdbcType="INTEGER" property="action" />
+    <result column="always" jdbcType="INTEGER" property="always" />
+    <result column="escalate" jdbcType="INTEGER" property="escalate" />
+    <result column="sms_id" jdbcType="VARCHAR" property="smsId" />
+    <result column="resend_duration" jdbcType="INTEGER" property="resendDuration" />
+    <result column="resendCount" jdbcType="INTEGER" property="resendcount" />
+    <result column="min" jdbcType="DOUBLE" property="min" />
+    <result column="max" jdbcType="DOUBLE" property="max" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    rule_id, tenant_id, device_type, action, always, escalate, sms_id, resend_duration, 
+    resendCount, min, max
+  </sql>
+  
+  <select id="selectByDeviceTypeAndTenantId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hp_devices_alarm_rules
+    where device_type = #{deviceType,jdbcType=VARCHAR} AND tenant_id = #{tenantId,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hp_devices_alarm_rules
+    where rule_id = #{ruleId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from hp_devices_alarm_rules
+    where rule_id = #{ruleId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hoperun.micro.security.model.HpDevicesAlarmRules">
+    insert into hp_devices_alarm_rules (rule_id, tenant_id, device_type, 
+      action, always, escalate, 
+      sms_id, resend_duration, resendCount, 
+      min, max)
+    values (#{ruleId,jdbcType=VARCHAR}, #{tenantId,jdbcType=VARCHAR}, #{deviceType,jdbcType=VARCHAR}, 
+      #{action,jdbcType=INTEGER}, #{always,jdbcType=INTEGER}, #{escalate,jdbcType=INTEGER}, 
+      #{smsId,jdbcType=VARCHAR}, #{resendDuration,jdbcType=INTEGER}, #{resendcount,jdbcType=INTEGER}, 
+      #{min,jdbcType=DOUBLE}, #{max,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoperun.micro.security.model.HpDevicesAlarmRules">
+    insert into hp_devices_alarm_rules
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ruleId != null">
+        rule_id,
+      </if>
+      <if test="tenantId != null">
+        tenant_id,
+      </if>
+      <if test="deviceType != null">
+        device_type,
+      </if>
+      <if test="action != null">
+        action,
+      </if>
+      <if test="always != null">
+        always,
+      </if>
+      <if test="escalate != null">
+        escalate,
+      </if>
+      <if test="smsId != null">
+        sms_id,
+      </if>
+      <if test="resendDuration != null">
+        resend_duration,
+      </if>
+      <if test="resendcount != null">
+        resendCount,
+      </if>
+      <if test="min != null">
+        min,
+      </if>
+      <if test="max != null">
+        max,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ruleId != null">
+        #{ruleId,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null">
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceType != null">
+        #{deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="action != null">
+        #{action,jdbcType=INTEGER},
+      </if>
+      <if test="always != null">
+        #{always,jdbcType=INTEGER},
+      </if>
+      <if test="escalate != null">
+        #{escalate,jdbcType=INTEGER},
+      </if>
+      <if test="smsId != null">
+        #{smsId,jdbcType=VARCHAR},
+      </if>
+      <if test="resendDuration != null">
+        #{resendDuration,jdbcType=INTEGER},
+      </if>
+      <if test="resendcount != null">
+        #{resendcount,jdbcType=INTEGER},
+      </if>
+      <if test="min != null">
+        #{min,jdbcType=DOUBLE},
+      </if>
+      <if test="max != null">
+        #{max,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoperun.micro.security.model.HpDevicesAlarmRules">
+    update hp_devices_alarm_rules
+    <set>
+      <if test="tenantId != null">
+        tenant_id = #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceType != null">
+        device_type = #{deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="action != null">
+        action = #{action,jdbcType=INTEGER},
+      </if>
+      <if test="always != null">
+        always = #{always,jdbcType=INTEGER},
+      </if>
+      <if test="escalate != null">
+        escalate = #{escalate,jdbcType=INTEGER},
+      </if>
+      <if test="smsId != null">
+        sms_id = #{smsId,jdbcType=VARCHAR},
+      </if>
+      <if test="resendDuration != null">
+        resend_duration = #{resendDuration,jdbcType=INTEGER},
+      </if>
+      <if test="resendcount != null">
+        resendCount = #{resendcount,jdbcType=INTEGER},
+      </if>
+      <if test="min != null">
+        min = #{min,jdbcType=DOUBLE},
+      </if>
+      <if test="max != null">
+        max = #{max,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where rule_id = #{ruleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoperun.micro.security.model.HpDevicesAlarmRules">
+    update hp_devices_alarm_rules
+    set tenant_id = #{tenantId,jdbcType=VARCHAR},
+      device_type = #{deviceType,jdbcType=VARCHAR},
+      action = #{action,jdbcType=INTEGER},
+      always = #{always,jdbcType=INTEGER},
+      escalate = #{escalate,jdbcType=INTEGER},
+      sms_id = #{smsId,jdbcType=VARCHAR},
+      resend_duration = #{resendDuration,jdbcType=INTEGER},
+      resendCount = #{resendcount,jdbcType=INTEGER},
+      min = #{min,jdbcType=DOUBLE},
+      max = #{max,jdbcType=DOUBLE}
+    where rule_id = #{ruleId,jdbcType=VARCHAR}
+  </update>
+</mapper>

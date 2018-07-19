@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hoperun.micro.security.dao.HpMaintainsEmployeeMapper">
+  <resultMap id="BaseResultMap" type="com.hoperun.micro.security.model.HpMaintainsEmployee">
+    <id column="employee_id" jdbcType="VARCHAR" property="employeeId" />
+    <result column="tenant_id" jdbcType="VARCHAR" property="tenantId" />
+    <result column="mtc_id" jdbcType="VARCHAR" property="mtcId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="mail" jdbcType="VARCHAR" property="mail" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    employee_id, tenant_id, mtc_id, name, phone, mail
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hp_maintains_employee
+    where employee_id = #{employeeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from hp_maintains_employee
+    where employee_id = #{employeeId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hoperun.micro.security.model.HpMaintainsEmployee">
+    insert into hp_maintains_employee (employee_id, tenant_id, mtc_id, 
+      name, phone, mail)
+    values (#{employeeId,jdbcType=VARCHAR}, #{tenantId,jdbcType=VARCHAR}, #{mtcId,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoperun.micro.security.model.HpMaintainsEmployee">
+    insert into hp_maintains_employee
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="employeeId != null">
+        employee_id,
+      </if>
+      <if test="tenantId != null">
+        tenant_id,
+      </if>
+      <if test="mtcId != null">
+        mtc_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="mail != null">
+        mail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="employeeId != null">
+        #{employeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null">
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="mtcId != null">
+        #{mtcId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null">
+        #{mail,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoperun.micro.security.model.HpMaintainsEmployee">
+    update hp_maintains_employee
+    <set>
+      <if test="tenantId != null">
+        tenant_id = #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="mtcId != null">
+        mtc_id = #{mtcId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null">
+        mail = #{mail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where employee_id = #{employeeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoperun.micro.security.model.HpMaintainsEmployee">
+    update hp_maintains_employee
+    set tenant_id = #{tenantId,jdbcType=VARCHAR},
+      mtc_id = #{mtcId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      mail = #{mail,jdbcType=VARCHAR}
+    where employee_id = #{employeeId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hoperun.micro.security.dao.HpDevicesCollectionMapper">
+	<resultMap id="BaseResultMap"
+		type="com.hoperun.micro.security.model.HpDevicesCollection">
+		<id column="collect_id" jdbcType="VARCHAR" property="collectId" />
+		<result column="device_type" jdbcType="VARCHAR" property="deviceType" />
+		<result column="tenant_id" jdbcType="VARCHAR" property="tenantId" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="meta_device_id" jdbcType="VARCHAR" property="metaDeviceId" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		collect_id, device_type, tenant_id, name, meta_device_id
+	</sql>
+
+	<sql id="QUERY_WHERE_CLAUSE">
+		<where>
+			<if test="collectId != null "><![CDATA[AND collect_id = #{collectId,jdbcType=VARCHAR}]]></if>
+			<if test="deviceType != null "><![CDATA[AND device_type = #{deviceType,jdbcType=VARCHAR}]]></if>
+			<if test="tenantId != null "><![CDATA[AND tenant_id = #{tenantId,jdbcType=VARCHAR}]]></if>
+			<if test="name != null "><![CDATA[AND name = #{name,jdbcType=VARCHAR}]]></if>
+			<if test="metaDeviceId != null "><![CDATA[AND meta_device_id = #{metaDeviceId,jdbcType=VARCHAR}]]></if>
+		</where>
+	</sql>
+
+
+	<select id="selectByParams" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from hp_devices_collection
+		<include refid="QUERY_WHERE_CLAUSE" />
+	</select>
+
+	<select id="selectAllRecordsByTenantId" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select DISTINCT
+		<include refid="Base_Column_List" />
+		from hp_devices_collection
+		where tenant_id =
+		#{tenantId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from hp_devices_collection
+		where collect_id = #{collectId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from hp_devices_collection
+		where collect_id = #{collectId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert"
+		parameterType="com.hoperun.micro.security.model.HpDevicesCollection">
+		insert into hp_devices_collection (collect_id, device_type, tenant_id,
+		name, meta_device_id)
+		values (#{collectId,jdbcType=VARCHAR}, #{deviceType,jdbcType=VARCHAR},
+		#{tenantId,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR}, #{metaDeviceId,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.hoperun.micro.security.model.HpDevicesCollection">
+		insert into hp_devices_collection
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="collectId != null">
+				collect_id,
+			</if>
+			<if test="deviceType != null">
+				device_type,
+			</if>
+			<if test="tenantId != null">
+				tenant_id,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="metaDeviceId != null">
+				meta_device_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="collectId != null">
+				#{collectId,jdbcType=VARCHAR},
+			</if>
+			<if test="deviceType != null">
+				#{deviceType,jdbcType=VARCHAR},
+			</if>
+			<if test="tenantId != null">
+				#{tenantId,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="metaDeviceId != null">
+				#{metaDeviceId,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.hoperun.micro.security.model.HpDevicesCollection">
+		update hp_devices_collection
+		<set>
+			<if test="deviceType != null">
+				device_type = #{deviceType,jdbcType=VARCHAR},
+			</if>
+			<if test="tenantId != null">
+				tenant_id = #{tenantId,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="metaDeviceId != null">
+				meta_device_id = #{metaDeviceId,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where collect_id = #{collectId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.hoperun.micro.security.model.HpDevicesCollection">
+		update hp_devices_collection
+		set device_type = #{deviceType,jdbcType=VARCHAR},
+		tenant_id = #{tenantId,jdbcType=VARCHAR},
+		name = #{name,jdbcType=VARCHAR},
+		meta_device_id = #{metaDeviceId,jdbcType=VARCHAR}
+		where collect_id = #{collectId,jdbcType=VARCHAR}
+	</update>
+</mapper>

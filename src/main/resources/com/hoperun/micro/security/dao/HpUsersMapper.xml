@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hoperun.micro.security.dao.HpUsersMapper">
+  <resultMap id="BaseResultMap" type="com.hoperun.micro.security.model.HpUsers">
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="tenant_id" jdbcType="VARCHAR" property="tenantId" />
+    <result column="branch_id" jdbcType="VARCHAR" property="branchId" />
+    <result column="dep_id" jdbcType="VARCHAR" property="depId" />
+    <result column="job_id" jdbcType="VARCHAR" property="jobId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="portrait" jdbcType="VARCHAR" property="portrait" />
+    <result column="role" jdbcType="INTEGER" property="role" />
+    <result column="is_notice" jdbcType="BIT" property="isNotice" />
+    <result column="is_alert" jdbcType="BIT" property="isAlert" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="last_auth_date" jdbcType="TIMESTAMP" property="lastAuthDate" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="slat" jdbcType="VARCHAR" property="slat" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="id_card" jdbcType="VARCHAR" property="idCard" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="signature" jdbcType="VARCHAR" property="signature" />
+    <result column="wx_nick" jdbcType="VARCHAR" property="wxNick" />
+    <result column="wx_id" jdbcType="VARCHAR" property="wxId" />
+    <result column="height" jdbcType="INTEGER" property="height" />
+    <result column="weight" jdbcType="INTEGER" property="weight" />
+    <result column="bmi" jdbcType="REAL" property="bmi" />
+    <result column="birthday" jdbcType="VARCHAR" property="birthday" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hoperun.micro.security.model.HpUsers">
+    <result column="extra" jdbcType="LONGVARCHAR" property="extra" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, tenant_id, branch_id, dep_id, job_id, name, portrait, role, is_notice, is_alert, 
+    status, create_date, last_auth_date, password, slat, phone, email, id_card, address, 
+    signature, wx_nick, wx_id, height, weight, bmi, birthday, sex
+  </sql>
+  <sql id="Blob_Column_List">
+    extra
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from hp_users
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from hp_users
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hoperun.micro.security.model.HpUsers">
+    insert into hp_users (user_id, tenant_id, branch_id, 
+      dep_id, job_id, name, 
+      portrait, role, is_notice, 
+      is_alert, status, create_date, 
+      last_auth_date, password, slat, 
+      phone, email, id_card, 
+      address, signature, wx_nick, 
+      wx_id, height, weight, 
+      bmi, birthday, sex, extra
+      )
+    values (#{userId,jdbcType=VARCHAR}, #{tenantId,jdbcType=VARCHAR}, #{branchId,jdbcType=VARCHAR}, 
+      #{depId,jdbcType=VARCHAR}, #{jobId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{portrait,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, #{isNotice,jdbcType=BIT}, 
+      #{isAlert,jdbcType=BIT}, #{status,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{lastAuthDate,jdbcType=TIMESTAMP}, #{password,jdbcType=VARCHAR}, #{slat,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{signature,jdbcType=VARCHAR}, #{wxNick,jdbcType=VARCHAR}, 
+      #{wxId,jdbcType=VARCHAR}, #{height,jdbcType=INTEGER}, #{weight,jdbcType=INTEGER}, 
+      #{bmi,jdbcType=REAL}, #{birthday,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{extra,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoperun.micro.security.model.HpUsers">
+    insert into hp_users
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="tenantId != null">
+        tenant_id,
+      </if>
+      <if test="branchId != null">
+        branch_id,
+      </if>
+      <if test="depId != null">
+        dep_id,
+      </if>
+      <if test="jobId != null">
+        job_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="portrait != null">
+        portrait,
+      </if>
+      <if test="role != null">
+        role,
+      </if>
+      <if test="isNotice != null">
+        is_notice,
+      </if>
+      <if test="isAlert != null">
+        is_alert,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="lastAuthDate != null">
+        last_auth_date,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="slat != null">
+        slat,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="idCard != null">
+        id_card,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="signature != null">
+        signature,
+      </if>
+      <if test="wxNick != null">
+        wx_nick,
+      </if>
+      <if test="wxId != null">
+        wx_id,
+      </if>
+      <if test="height != null">
+        height,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="bmi != null">
+        bmi,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="extra != null">
+        extra,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null">
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="branchId != null">
+        #{branchId,jdbcType=VARCHAR},
+      </if>
+      <if test="depId != null">
+        #{depId,jdbcType=VARCHAR},
+      </if>
+      <if test="jobId != null">
+        #{jobId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="portrait != null">
+        #{portrait,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null">
+        #{role,jdbcType=INTEGER},
+      </if>
+      <if test="isNotice != null">
+        #{isNotice,jdbcType=BIT},
+      </if>
+      <if test="isAlert != null">
+        #{isAlert,jdbcType=BIT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastAuthDate != null">
+        #{lastAuthDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="slat != null">
+        #{slat,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null">
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="signature != null">
+        #{signature,jdbcType=VARCHAR},
+      </if>
+      <if test="wxNick != null">
+        #{wxNick,jdbcType=VARCHAR},
+      </if>
+      <if test="wxId != null">
+        #{wxId,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        #{height,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="bmi != null">
+        #{bmi,jdbcType=REAL},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="extra != null">
+        #{extra,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoperun.micro.security.model.HpUsers">
+    update hp_users
+    <set>
+      <if test="tenantId != null">
+        tenant_id = #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="branchId != null">
+        branch_id = #{branchId,jdbcType=VARCHAR},
+      </if>
+      <if test="depId != null">
+        dep_id = #{depId,jdbcType=VARCHAR},
+      </if>
+      <if test="jobId != null">
+        job_id = #{jobId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="portrait != null">
+        portrait = #{portrait,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null">
+        role = #{role,jdbcType=INTEGER},
+      </if>
+      <if test="isNotice != null">
+        is_notice = #{isNotice,jdbcType=BIT},
+      </if>
+      <if test="isAlert != null">
+        is_alert = #{isAlert,jdbcType=BIT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastAuthDate != null">
+        last_auth_date = #{lastAuthDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="slat != null">
+        slat = #{slat,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null">
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="signature != null">
+        signature = #{signature,jdbcType=VARCHAR},
+      </if>
+      <if test="wxNick != null">
+        wx_nick = #{wxNick,jdbcType=VARCHAR},
+      </if>
+      <if test="wxId != null">
+        wx_id = #{wxId,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        height = #{height,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="bmi != null">
+        bmi = #{bmi,jdbcType=REAL},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="extra != null">
+        extra = #{extra,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hoperun.micro.security.model.HpUsers">
+    update hp_users
+    set tenant_id = #{tenantId,jdbcType=VARCHAR},
+      branch_id = #{branchId,jdbcType=VARCHAR},
+      dep_id = #{depId,jdbcType=VARCHAR},
+      job_id = #{jobId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      portrait = #{portrait,jdbcType=VARCHAR},
+      role = #{role,jdbcType=INTEGER},
+      is_notice = #{isNotice,jdbcType=BIT},
+      is_alert = #{isAlert,jdbcType=BIT},
+      status = #{status,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      last_auth_date = #{lastAuthDate,jdbcType=TIMESTAMP},
+      password = #{password,jdbcType=VARCHAR},
+      slat = #{slat,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      signature = #{signature,jdbcType=VARCHAR},
+      wx_nick = #{wxNick,jdbcType=VARCHAR},
+      wx_id = #{wxId,jdbcType=VARCHAR},
+      height = #{height,jdbcType=INTEGER},
+      weight = #{weight,jdbcType=INTEGER},
+      bmi = #{bmi,jdbcType=REAL},
+      birthday = #{birthday,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      extra = #{extra,jdbcType=LONGVARCHAR}
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoperun.micro.security.model.HpUsers">
+    update hp_users
+    set tenant_id = #{tenantId,jdbcType=VARCHAR},
+      branch_id = #{branchId,jdbcType=VARCHAR},
+      dep_id = #{depId,jdbcType=VARCHAR},
+      job_id = #{jobId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      portrait = #{portrait,jdbcType=VARCHAR},
+      role = #{role,jdbcType=INTEGER},
+      is_notice = #{isNotice,jdbcType=BIT},
+      is_alert = #{isAlert,jdbcType=BIT},
+      status = #{status,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      last_auth_date = #{lastAuthDate,jdbcType=TIMESTAMP},
+      password = #{password,jdbcType=VARCHAR},
+      slat = #{slat,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      signature = #{signature,jdbcType=VARCHAR},
+      wx_nick = #{wxNick,jdbcType=VARCHAR},
+      wx_id = #{wxId,jdbcType=VARCHAR},
+      height = #{height,jdbcType=INTEGER},
+      weight = #{weight,jdbcType=INTEGER},
+      bmi = #{bmi,jdbcType=REAL},
+      birthday = #{birthday,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hoperun.micro.security.dao.HpDevicesMfsMapper">
+  <resultMap id="BaseResultMap" type="com.hoperun.micro.security.model.HpDevicesMfs">
+    <id column="mf_id" jdbcType="VARCHAR" property="mfId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="location" jdbcType="VARCHAR" property="location" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    mf_id, name, location
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hp_devices_mfs
+    where mf_id = #{mfId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from hp_devices_mfs
+    where mf_id = #{mfId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hoperun.micro.security.model.HpDevicesMfs">
+    insert into hp_devices_mfs (mf_id, name, location
+      )
+    values (#{mfId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoperun.micro.security.model.HpDevicesMfs">
+    insert into hp_devices_mfs
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mfId != null">
+        mf_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="location != null">
+        location,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mfId != null">
+        #{mfId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null">
+        #{location,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoperun.micro.security.model.HpDevicesMfs">
+    update hp_devices_mfs
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null">
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where mf_id = #{mfId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoperun.micro.security.model.HpDevicesMfs">
+    update hp_devices_mfs
+    set name = #{name,jdbcType=VARCHAR},
+      location = #{location,jdbcType=VARCHAR}
+    where mf_id = #{mfId,jdbcType=VARCHAR}
+  </update>
+</mapper>
