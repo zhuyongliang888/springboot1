@@ -62,5 +62,8 @@ public class ErrorCode
 
     public static final Integer ERR_CODE_SELECT = 5030004;
     public static final String ERR_MSG_SELECT = "Query database failure";
+	//提交个修改测试jenkins是否会触发编译
+	public static final Integer ERR_CODE_SELECT1 = 5030004;
+    public static final String ERR_MSG_SELECT1 = "Query database failure";
 
 }
