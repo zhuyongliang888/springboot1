@@ -106,13 +106,14 @@
 
 		</plugins>
 	</build>
-	
+	<!--
 	<repositories> 
         <repository> 
             <id>spring-milestone</id> 
             <url>http://repo.spring.io/libs-release</url> 
         </repository> 
 	</repositories>
+	-->
   
   
   
